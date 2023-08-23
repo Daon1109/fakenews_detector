@@ -1,7 +1,7 @@
 import pandas as pd
 import re
 
-df_fake = pd.read_csv('C:/Programming_2023/dataset/test_fake.csv', encoding='utf-8')
+df_fake = pd.read_csv('C:/Coding/AI&ML/Projects/fakenews_detector/data/test_fake.csv', encoding='utf-8')
 #normalstate = ['News','politics','Government News','left-news','US_News','Middle-east']
 
 
@@ -10,6 +10,7 @@ subject_drop_a = df_fake['date']
 subject_drop_b = df_fake['title']
 for i in range(len(subject_drop_a)):
     
+    print(i)
     droped = 0
     
     # 데이터 전처리: 칸 벗어남
@@ -17,13 +18,13 @@ for i in range(len(subject_drop_a)):
         df_fake = df_fake.drop(index=i, axis=0)
         droped = 1
         print('dropped')
-    elif int(subject_drop_a[i][0]) == 0 or int(subject_drop_a[i][0]) == 1 or int(subject_drop_a[i][0]) == 2 or int(subject_drop_a[i][0]) == 3:
+    elif int(subject_drop_a[i][0]) in [0,1,2,3,4,5,6,7,8,9]:
         pass
     else:
         df_fake = df_fake.drop(index=i, axis=0)
         droped = 1
         print('dropped')
-        
+
     # 중복 방지
     if droped == 1:
         pass
@@ -34,8 +35,11 @@ for i in range(len(subject_drop_a)):
             df_fake = df_fake.drop(index=i, axis=0)
             print('dropped')    
         else:
-            pass    
+            pass
 
+
+# 전처리된 데이터 저장
+df_fake.to_csv("C:/Coding/AI&ML/Projects/fakenews_detector/data/data_preprocessed.csv", index = True)
 
 
 
